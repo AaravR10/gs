@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Getaway Shootout 1.2.2</title>
+    <style>
+      body { margin: 0; background: #000; overflow: hidden; }
+      #unity-container { width: 100vw; height: 100vh; }
+      canvas { width: 100%; height: 100%; display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="unity-container">
+      <canvas id="unity-canvas"></canvas>
+    </div>
+    
+    <!-- Load the loader you provided -->
+    <script src="loader.js"></script>
+    
+    <script>
+      var canvas = document.querySelector("#unity-canvas");
+
+      // This config object tells the loader where your files are
+      var config = {
+        dataUrl: "game.data",
+        frameworkUrl: "game.framework.js",
+        codeUrl: "game.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "New Eich Games",
+        productName: "Getaway Shootout",
+        productVersion: "1.2.2",
+      };
+
+      // This triggers the game to start
+      createUnityInstance(canvas, config).then(function (unityInstance) {
+        console.log("Game Loaded successfully");
+      }).catch(function (message) {
+        alert(message);
+      });
+    </script>
+  </body>
+</html>
