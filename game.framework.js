@@ -993,6 +993,13 @@ var unityFramework = ( () => {
         }
         function _InitSDK(version) {
             console.log("Bypassing CrazyGames SDK...");
+            if (typeof UTF8ToString !== "undefined") {
+                window.unityStringify = UTF8ToString;
+            } else if (typeof Pointer_stringify !== "undefined") {
+                window.unityStringify = Pointer_stringify;
+            } else {
+                window.unityStringify = function(text) { return text; }; // Fallback
+            }
             // Fake the initialization success callback
             setTimeout(function() {
                 if (typeof SendMessage === 'function') {
@@ -2932,8 +2939,7 @@ var unityFramework = ( () => {
             }, 100);
         }
         function _RequestBannersSDK(bannersJSON) {
-            var banners = JSON.parse(window.unityStringify(bannersJSON));
-            window.CrazyGames.SDK.banner.requestOverlayBanners(banners, function(bannerId, message, error) {})
+            console.log("Mock SDK: Banners Requested (Blocked)");
         }
         function _RequestInviteUrlSDK(paramsStr) {
             var params = JSON.parse(window.unityStringify(paramsStr));
